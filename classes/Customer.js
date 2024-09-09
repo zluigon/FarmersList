@@ -7,6 +7,7 @@ class Customer {
     this.shippingAddress = shippingAddress;
 
     this.orderHistory = [];
+    this.rewardPoints = 0;
   }
 
   addToOrderHistory(cart) {
@@ -15,6 +16,12 @@ class Customer {
     } else {
       throw new Error("Only carts can be added to order history");
     }
+  }
+
+  getRewardPoints() {
+    this.rewardPoints = this.orderHistory.reduce((totalPoints, cart) => {
+      return totalPoints + cart.totalRewardPoints();
+    }, 0);
   }
 }
 
